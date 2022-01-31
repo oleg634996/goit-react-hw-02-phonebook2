@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import Form from './form/form';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css';
+import { Component } from 'react/cjs/react.production.min';
+
+class App extends Component {
+  state = {
+    contacts: [],
+    filter: '',
+  };
+
+  onSubmitForm = data => {
+    this.state.contacts.find(
+      contact => contact.name.toLowerCase() === data.name.toLowerCase(),
+    )
+      ? alert(
+          `Такой контакт с именем ${
+            data.name[0].toUpperCase() + data.name.slice(1)
+          } уже есть `,
+        )
+      : this.setState(prevState => ({
+          contacts: [data, ...prevState.contacts],
+        }));
+  };
+
+  render() {
+    console.log(this.state.contacts);
+    return <Form onSubmitForm={this.onSubmitForm} />;
+  }
 }
 
 export default App;
