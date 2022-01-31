@@ -1,6 +1,6 @@
 import Form from './form/form';
 import Contact from './contatcts/contacts';
-import Search from './seargh/search';
+import Search from './search/search';
 
 import './App.css';
 import { Component } from 'react/cjs/react.production.min';
