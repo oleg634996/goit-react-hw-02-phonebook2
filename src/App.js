@@ -1,5 +1,6 @@
 import Form from './form/form';
 import Contact from './contatcts/contacts';
+import Search from './seargh/search';
 
 import './App.css';
 import { Component } from 'react/cjs/react.production.min';
@@ -30,20 +31,31 @@ class App extends Component {
   };
 
   onDeleteContact = data => {
-    console.log(data);
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.name !== data),
     }));
   };
 
+  onSearchInput = event => {
+    this.setState({
+      filter: event.currentTarget.value,
+    });
+  };
+
   render() {
-    console.log(this.state.contacts);
+    const { contacts, filter } = this.state;
+    const searchContact = contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase()),
+    );
+
     return (
       <div>
         <Form onSubmitForm={this.onSubmitForm} />,
+        <Search onSearchInput={this.onSearchInput} />
         <Contact
           contacts={this.state.contacts}
           onDeleteContact={this.onDeleteContact}
+          searchContact={searchContact}
         />
       </div>
     );
