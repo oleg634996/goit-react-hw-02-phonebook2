@@ -12,10 +12,11 @@ class Form extends Component {
 
   formSubmit = event => {
     event.preventDefault();
+    const { name, number } = this.state;
     const newContact = {
       id: shortid.generate(),
-      name: this.state.name,
-      number: this.state.number,
+      name: name,
+      number: number,
     };
 
     this.props.onSubmitForm(newContact);

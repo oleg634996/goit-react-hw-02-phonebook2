@@ -1,8 +1,8 @@
-export default function Contact({ contacts, onDeleteContact }) {
+export default function SearchContact({ searchContact, onDeleteContact }) {
   return (
     <div>
       <table>
-        {contacts.map(contact => {
+        {searchContact.map(contact => {
           const { id, name, number } = contact;
           return (
             <tbody key={id}>

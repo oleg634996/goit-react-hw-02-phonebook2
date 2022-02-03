@@ -1,6 +1,7 @@
 import Form from './components/Form/Form';
 import Contact from './components/Contatcts/Contacts';
 import Search from './components/Search/Search';
+import SearchContact from './components/SearchContact/SearchContact';
 
 import './App.css';
 import { Component } from 'react/cjs/react.production.min';
@@ -47,16 +48,23 @@ class App extends Component {
     const searchContact = contacts.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase()),
     );
+    const { onDeleteContact } = this;
 
     return (
       <div>
-        <Form onSubmitForm={this.onSubmitForm} />,
+        <Form onSubmitForm={this.onSubmitForm} />
         <Search onSearchInput={this.onSearchInput} />
-        <Contact
-          contacts={this.state.contacts}
-          onDeleteContact={this.onDeleteContact}
-          searchContact={searchContact}
-        />
+        {searchContact ? (
+          <SearchContact
+            searchContact={searchContact}
+            onDeleteContact={onDeleteContact}
+          />
+        ) : (
+          <Contact
+            contacts={this.state.contacts}
+            onDeleteContact={onDeleteContact}
+          />
+        )}
       </div>
     );
   }
